@@ -37,8 +37,7 @@ class Student():
             all_midl = midl_num + midl_num
             print(all_midl)
 
-    def some_student(mid,courses_in_progress, finished_courses):
-        def __str__(self):
+        def __str__(self, mid, courses_in_progress, finished_courses):
             res = print(f' имя:{cool_mentor[0:1]}\n фамилия:{cool_mentor[1:2]}\n средняя оценка:{mid()}\n курсы в процессе изучения:{courses_in_progress}\n завершенные курсы:{finished_courses}')
 
 class Mentor:
@@ -70,8 +69,7 @@ class Lecturer(Mentor):
                 mentor_all_midl = midl_num + midl_num
                 print(mentor_all_midl)
 
-        def some_lecturer(mid_m):
-            def __str__(self):
+            def __str__(self, mid_m):
                 rel = print(f' имя:{cool_mentor[0:1]}\n фамилия:{cool_mentor[1:2]}\n средняя оценка:{mid_m()}')
 
 
@@ -85,7 +83,6 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
-    def some_reviewer():
         def __str__(self):
             rer = print(f' имя:{cool_mentor[0:1]}\n фамилия:{cool_mentor[1:2]}')
 
