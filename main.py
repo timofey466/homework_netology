@@ -10,6 +10,8 @@ class Student():
     def add_courses(self, course_name):
         self.finished_course.append(course_name)
 
+    best_student = ('Ruoy', 'Eman', 'your_gender')
+
     def rate_hw(self, lecturer, course, grade,student):
         if isinstance(lecturer, Mentor) and course in self.courses_in_progress and course in student.courses_in_progress_m:
             if course in lecturer.grades_M:
@@ -19,10 +21,10 @@ class Student():
         else:
             return 'Ошибка'
 
-    def mid(self, student, grades):
+    def mid(grades):
         for number in grades:
             all_num = number + number
-            if best_student in Student:
+            if isinstance(best_student , Student):
                 num_x = len(grades)
                 midl_num =  all_num % num_x
                 print(midl_num)
@@ -37,8 +39,24 @@ class Student():
             all_midl = midl_num + midl_num
             print(all_midl)
 
-        def __str__(self, mid, courses_in_progress, finished_courses):
-            res = print(f' имя:{cool_mentor[0:1]}\n фамилия:{cool_mentor[1:2]}\n средняя оценка:{mid()}\n курсы в процессе изучения:{courses_in_progress}\n завершенные курсы:{finished_courses}')
+    def __str__(name, sur, mid, courses_in_progress, finished_courses):
+        res = []
+        res.append(
+            {"name:", name}
+        )
+        res.append(
+            {"surname:", sur}
+        )
+        res.append(
+            {"midl_number:", mid}
+        )
+        res.append(
+            {'courses study now:', courses_in_progress}
+        )
+        res.append(
+            {'finished_vourses:', finished_courses}
+        )
+        return res
 
 class Mentor:
     def __init__(self, name, surname):
@@ -52,7 +70,7 @@ class Mentor:
 
 class Lecturer(Mentor):
         def mid_m(self, lecturer, grades_M):
-            for number in grades_M:
+            for number in int(grades_M):
                 all_num = number + number
                 if cool_mentor in Mentor:
                     num_x = len(grades_M)
@@ -69,8 +87,20 @@ class Lecturer(Mentor):
                 mentor_all_midl = midl_num + midl_num
                 print(mentor_all_midl)
 
-            def __str__(self, mid_m):
-                rel = print(f' имя:{cool_mentor[0:1]}\n фамилия:{cool_mentor[1:2]}\n средняя оценка:{mid_m()}')
+
+
+ #       def __str__(name_, sur, mid_m):
+  #          rel = []
+   #         rel.append(
+    #            {'name:', name_}
+     #       )
+      #      rel.append(
+       #         {'surname:', sur}
+        #    )
+         #   rel.append(
+          #      {'midl_number:', mid_m}
+           # )
+            #return rel
 
 
 class Reviewer(Mentor):
@@ -83,20 +113,27 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
-        def __str__(self):
-            rer = print(f' имя:{cool_mentor[0:1]}\n фамилия:{cool_mentor[1:2]}')
+    cool_mentor = ('Some', 'Buddy')
+
+#    def __str__(cool_mentor, cool_sur):
+ #       rer = {
+  #          "name:", str(cool_mentor),
+   #         "surname:", str(cool_sur)
+    #    }
+#
+ #       return rer
+
+number = 1,2,3,4,5,6,7,8,9,10
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
 
-cool_mentor = Mentor('Some', 'Buddy')
+cool_mentor = Reviewer('Some', 'Buddy')
 cool_mentor.courses_attached += ['Python']
 
-some_reviewer = str()
-
 cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
 
-print(best_student.grades)
-print(some_reviewer())
+#print(Student.__str__('Ruoy','Eman',123, 'python', 'HTML, CSS'))
+print(Student.mid('1'))
