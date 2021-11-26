@@ -136,4 +136,3 @@ cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
 
 #print(Student.__str__('Ruoy','Eman',123, 'python', 'HTML, CSS'))
-print(Student.mid('1'))
