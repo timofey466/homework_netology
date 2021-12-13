@@ -2,6 +2,7 @@ create table if not exists songer(
   soId serial primary key,
   soName varchar(40) not null ,
   Generel text 
+  albom varchar(30) not null
 );
 
 create table if not exists albom(
@@ -9,7 +10,8 @@ create table if not exists albom(
   albId serial primary key,
   albName varchar(40) not null ,
   albGenerel varchar(30) not null,
-  soyear serial not null
+  soyear integer not null
+  song varchar(30) unique
 );
 
 create table if not exists song(
@@ -17,11 +19,13 @@ create table if not exists song(
   songId serial primary key,
   songName varchar(40) not null ,
   songGenerel varchar(30) not null
-  songtime serial not null
+  songtime integer not null
 );
 
 create table if not exists general(
   genId serial primary key,
-  soId serial primary key, 
+  soId serial primary key,
+  songerId serial primary key,
+  alb serial primary key, 
   bio text 
 );
