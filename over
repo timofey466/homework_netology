@@ -1,5 +1,6 @@
 import requests
 from pprint import pprint
+from requests.models import Response
 import vk
 import os
 
@@ -9,26 +10,28 @@ def vk_profile(vk_token):
   
   re = requests.get(url)
   print(re)
+  responce = input(re)
   if responce.status_code == '201':
     print('not problem')
   else:
     print('have problem')
-  prof_id = re['id']
+  prof_id = responce['id']
 
 def vk_photo(vk_token, id):
 
   url1 = 'https://api.vk.com/method/wall.getById?extended=1&access_token=', vk_token ,'&v=5.131'
 
   ur1 = requests.get(url1)
-  print(ur1)
+  print(url1)
+  responce = input(ur1)
   if responce.status_code == '201':
     print('not problem')
   else:
     print('have problem')
-  count_photo = ur1['items']
+  count_photo = responce['items']
   item = count_photo.values()
   count_item = range(0, item)
-  path = os.path.join(os.getcwd(), 'doc.json')
+  path = os.path.join(os.getcwd(), '\doc.json')
 
   url2 = 'https://api.vk.com/method/photo.get?photo_sizes=1?type=z&access_token=', vk_token ,'&v=5.131'
 
@@ -37,11 +40,12 @@ def vk_photo(vk_token, id):
   yandex_ur = 'https://cloud-api.yandex.net/v1/disk/resources/%F2vk_photo'
   yget = requests.get(yandex_ur)
   print(yget)
-  if responce.status_code == '201':
+  responce1 = input(yget)
+  if responce1.status_code == '201':
     print('not problem')
   else:
     print('have problem')
-  h_ref = yget['href']
+  h_ref = responce1['href']
   href = h_ref.values()
 
   for letters in count_item:
@@ -50,22 +54,26 @@ def vk_photo(vk_token, id):
 
     uri = requests.get(url2)
     print(uri)
-    if responce.status_code == '201':
+    responce2 = input(uri)
+    if responce2.status_code == '201':
       print('not problem')
     else:
       print('have problem')
     red = requests.get(url3)
     print(red)
-    if responce.status_code == '201':
+    responce3 = input(red)
+    if responce3.status_code == '201':
       print('not problem')
     else:
       print('have problem')
-    lik = red['likes']
+    lik = responce3['likes']
     like = lik.values()
     y_url = 'https://cloud-api.yandex.net/v1/disk/resources/upload', uri, '/', like, href
     end = requests.post(y_url)
     print(end)
-    if responce.status_code == '201':
+    responce4 = input(end)
+    if responce4.status_code == '201':
       print('not problem')
     else:
+      print('have problem')
       print('have problem')
