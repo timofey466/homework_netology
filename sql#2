@@ -1,31 +1,29 @@
 create table if not exists songer(
-  soId serial primary key,
-  soName varchar(40) not null ,
+  Id serial primary key,
+  Name varchar(40) not null ,
   Generel text 
-  albom varchar(30) not null
 );
 
 create table if not exists albom(
-  soId serial primary key,
-  albId serial primary key,
-  albName varchar(40) not null ,
-  albGenerel varchar(30) not null,
-  soyear integer not null
-  song varchar(30) unique
+  first_id integer references songer(Id),
+  Id serial primary key,
+  Name varchar(40) not null ,
+  Generel varchar(30) not null,
+  year integer not null
 );
 
 create table if not exists song(
-  albId serial primary key,
-  songId serial primary key,
-  songName varchar(40) not null ,
-  songGenerel varchar(30) not null
-  songtime integer not null
+  second_id integer references albom(Id),
+  Id serial primary key,
+  Name varchar(40) not null ,
+  Generel varchar(30) not null
+  time integer not null
 );
 
 create table if not exists general(
-  genId serial primary key,
-  soId serial primary key,
-  songerId serial primary key,
-  alb serial primary key, 
-  bio text 
+  Id serial primary key,
+  third_id integer references songer(Id),
+  fourth_id integer references albom(Id),
+  fiveth_id integer references song(Id),
+  bio varchar(40) unique not null
 );
