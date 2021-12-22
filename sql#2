@@ -1,8 +1,9 @@
 create table if not exists songer(
   Id serial primary key,
   Name varchar(40) not null ,
-  Generel text 
+  Id_general unique
 );
+
 
 create table if not exists albom(
   first_id integer references songer(Id),
@@ -23,7 +24,4 @@ create table if not exists song(
 create table if not exists general(
   Id serial primary key,
   third_id integer references songer(Id),
-  fourth_id integer references albom(Id),
-  fiveth_id integer references song(Id),
-  bio varchar(40) unique not null
 );
