@@ -5,14 +5,14 @@ create table if not exists songer(
 
 create table if not exists albom(
   Id serial primary key,
-  Name varchar(40) not null ,
+  title varchar(40) not null ,
   years integer not null
 );
 
 create table if not exists song(
   second_id integer references albom(Id),
   Id serial primary key,
-  Name varchar(40) not null ,
+  title varchar(40) not null ,
   time integer not null
 );
 
@@ -37,4 +37,9 @@ CREATE TABLE IF NOT EXISTS playlist(
 	Id serial PRIMARY KEY,
 	title UNIQUE NOT NULL ,
 	year_old integer NOT NULL
+	);
+CREATE TABLE IF NOT EXISTS song_in_playlist(
+	Id serial PRIMARY KEY,
+	song_id integer REFERENCES song(Id),
+	playlist integer REFERENCES playlist(Id)
 	);
