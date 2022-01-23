@@ -13,10 +13,10 @@ create table if not exists albom(
   Id serial primary key,
   title varchar(40) not null ,
   years integer not null
+  second_id integer references song(id)
 );
 
 create table if not exists song(
-  second_id integer references albom(Id),
   Id serial primary key,
   title varchar(40) not null ,
   times numeric 
