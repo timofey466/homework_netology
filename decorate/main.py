@@ -1,0 +1,37 @@
+from datetime import datetime
+import args as args
+import kwargs as kwargs
+import os
+
+path = os.path.join(os.getcwd(),'info.txt')
+
+def dec_one(function):
+    def write_character(args, kwargs):
+        with open(path, encoding='utf-8') as file:
+            pacher = datetime.now()
+            file.write(f'функция была вызвана в {pacher}')
+            title = function.__name__
+            file.write(f'имя функции {title}')
+            file.write(f'функция была вызвана с аргументами {args, kwargs}')
+            result = function()
+            file.write(f'функция была вызвана с результатом {result}')
+            file.close()
+    return write_character
+
+def dec_two(function):
+    def write_character_two(args, kwargs):
+        with open(path, encoding='utf-8') as file:
+            time = datetime.now()
+            file.write(f'функция была вызвана в {time}')
+            titles = function.__name__
+            file.write(f'имя функции {titles}')
+            file.write(f'функция была вызвана с аргументами {args, kwargs}')
+            result = function()
+            file.write(f'функция была вызвана с результатом {result}')
+            file.write(f'функция была вызвана по пути {path}')
+            file.close()
+    return write_character_two
+
+
+
+
