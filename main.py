@@ -1,138 +1,64 @@
-class Student():
-    def __init__(self, name, surname, gender):
-        self.name = name
-        self.surname = surname
-        self.gender = gender
-        self.finished_courses = []
-        self.courses_in_progress = []
-        self.grades = {}
+from random import randrange
+import sqlalchemy
+from vk_info import city, age, title, best_family, gender, vk_id
+from sqlalchemy_ import People
+import vk_api
+from vk_api.longpoll import VkLongPoll, VkEventType
 
-    def add_courses(self, course_name):
-        self.finished_course.append(course_name)
+token = input('Token: ')
 
-    best_student = ('Ruoy', 'Eman', 'your_gender')
-
-    def rate_hw(self, lecturer, course, grade,student):
-        if isinstance(lecturer, Mentor) and course in self.courses_in_progress and course in student.courses_in_progress_m:
-            if course in lecturer.grades_M:
-                lecturer.grades_M[course] += [grade]
-            else:
-                lecturer.grades_M[course] = [grade]
-        else:
-            return 'Ошибка'
-
-    def mid(grades):
-        for number in grades:
-            all_num = number + number
-            if isinstance(best_student , Student):
-                num_x = len(grades)
-                midl_num =  all_num % num_x
-                print(midl_num)
-
-    def midl_best(self,midl_num):
-        for number in midl_num:
-            best_ln = len(best_student)
-            midd = 0
-        while best_ln >= midd:
-            midd + 1
-        if midd + 1:
-            all_midl = midl_num + midl_num
-            print(all_midl)
-
-    def __str__(name, sur, mid, courses_in_progress, finished_courses):
-        res = []
-        res.append(
-            {"name:", name}
-        )
-        res.append(
-            {"surname:", sur}
-        )
-        res.append(
-            {"midl_number:", mid}
-        )
-        res.append(
-            {'courses study now:', courses_in_progress}
-        )
-        res.append(
-            {'finished_vourses:', finished_courses}
-        )
-        return res
-
-class Mentor:
-    def __init__(self, name, surname):
-        self.name = name
-        self.surname = surname
-        self.courses_attached = []
-        self.grades_M = {}
-        self.finished_courses_m = []
-        self.courses_in_progress_m = []
+vk = vk_api.VkApi(token=token)
+longpoll = VkLongPoll(vk)
+Dns = 'postgresql://postgres:adminglocalhost:5432/postgres'
+engine = sqlalchemy.create_engine(Dns)
 
 
-class Lecturer(Mentor):
-        def mid_m(self, lecturer, grades_M):
-            for number in int(grades_M):
-                all_num = number + number
-                if cool_mentor in Mentor:
-                    num_x = len(grades_M)
-                    midl_num =  all_num % num_x
-                    print(midl_num)
+def write_msg(user_id, message):
+    vk.method('messages.send', {'user_id': user_id, 'message': message, 'random_id': randrange(10 ** 7)})
 
-        def midl_best(self,midl_num):
-            for number in midl_num:
-                best_ln = len(cool_mentor)
-                midd = 0
-            while best_ln >= midd:
-                midd + 1
-            if midd + 1:
-                mentor_all_midl = midl_num + midl_num
-                print(mentor_all_midl)
+
+for event in longpoll.listen():
+    if event.type == VkEventType.MESSAGE_NEW:
+
+        if event.to_me:
+            request = event.text
+
+            if request == "привет":
+                write_msg(event.user_id, f"Хай, {event.user_id} Это чат бот сделаный на основе Tinder")
+                write_msg(event.user_id, "чтобы начать знакомство напишите Начать")
+
+            elif len(title) == 0:
+                write_msg(event.from_user, "Чтобы начать работу напишите своё имя ")
+
+            elif len(best_family) == 0:
+                write_msg(event.from_user, "Чтобы начать работу напишите своё семейное положение")
+
+            elif len(age) == 0:
+                write_msg(event.from_user, "Чтобы начать работу напишите свой возраст")
+
+            elif len(gender) == 0:
+                write_msg(event.from_user, "Чтобы продолжить работу напишите свой пол")
+
+            elif len(city) == 0:
+                write_msg(event.user_id, "Чтобы Начать работу напишите название своего города")
+
+            with engine.connect() as connection:
+                result = connection.execute(f"SELECT id FROM people WHERE big_city == {city}")
+                title_result = connection.execute(f"SELECT name, vk FROM people WHERE id == {result}")
+                write_msg(event.user_id, f"Под ваши параметры подходит {title_result}")
+                write_msg(event.user_id, f"ссылка на страницу пользователя: https://vk.com/id{vk}")
+                black_list_id = []
+                black_list_id.append(People.vk)
+
+                if request.lower() == "повторный поиск":
+                    result = connection.execute(f"SELECT id FROM people WHERE big_city == {city}")
+                    title_result = connection.execute(f"SELECT name, vk FROM people WHERE id == {result}")
+                    write_msg(event.user_id, f"Под ваши параметры подходит {title_result}")
+                    write_msg(event.user_id, f"ссылка на страницу пользователя: https://vk.com/id{People.vk}")
+                    black_list_id = []
+                    black_list_id.append(People.vk)
 
 
 
- #       def __str__(name_, sur, mid_m):
-  #          rel = []
-   #         rel.append(
-    #            {'name:', name_}
-     #       )
-      #      rel.append(
-       #         {'surname:', sur}
-        #    )
-         #   rel.append(
-          #      {'midl_number:', mid_m}
-           # )
-            #return rel
 
 
-class Reviewer(Mentor):
-    def rate_hw(self, student, course, grade):
-        if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
-            if course in student.grades:
-                student.grades[course] += [grade]
-            else:
-                student.grades[course] = [grade]
-        else:
-            return 'Ошибка'
-
-    cool_mentor = ('Some', 'Buddy')
-
-#    def __str__(cool_mentor, cool_sur):
- #       rer = {
-  #          "name:", str(cool_mentor),
-   #         "surname:", str(cool_sur)
-    #    }
-#
- #       return rer
-
-number = 1,2,3,4,5,6,7,8,9,10
-
-best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
-
-cool_mentor = Reviewer('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
-
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-
-#print(Student.__str__('Ruoy','Eman',123, 'python', 'HTML, CSS'))
