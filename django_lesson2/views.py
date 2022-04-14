@@ -19,18 +19,12 @@ data = {
     }}
 
 
-def omlet(requests):
-    servings = int(requests.GET.get("servings", 1))
-    return HttpResponse(
-        f"omlet\n яйца, шт: {2 * servings},\n молоко, л: {0.1 * servings},\n соль, ч.л.: {0.5 * servings}")
+def dish(request, recipe):
+    serving = int(request.GET.get('serving', 1))
+    recipe = data.get(recipe).copy()
+    for key, value in data.items():
+        recipe[key] = int(value) * serving
+    context = {"recipe": recipe}
+    return render(request, 'calculator/food.html', context)
 
 
-def pasta(request):
-    servings = int(request.GET.get("servings", 1))
-    return HttpResponse(f"pasta\n макароны, г: {0.3 * servings}, сыр, г: {0.05 * servings}")
-
-
-def butter(request):
-    servings = int(request.GET.get("servings", 1))
-    return HttpResponse(f"butter\n хлеб, ломтик: {1 * servings},\n колбаса, ломтик: {1 * servings},\n сыр, ломтик: "
-                        f"{1*servings},\n помидор, ломтик: {1*servings}")

@@ -16,13 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from exte.views import omlet, pasta, butter
+from exte.views import dish
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pasta/', pasta),
-    path('butter/', butter),
-    path('omlet/', omlet)
+    path('<recipe>/<int:serving>', dish)
 ]
 
 
