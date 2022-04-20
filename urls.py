@@ -1,7 +1,7 @@
-"""exter URL Configuration
+"""main URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
+    https://docs.djangoproject.com/en/2.1/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from netology.views import index, current_time, work
+
+import phones.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='first_hi'),
-    path('current_time/', current_time, name='second_time'),
-    path('workdir/', work, name="workdir_thied"),
+    path('catalog/<sort>/', phones.views.show_catalog),
+    path('catalog/<slug:slug>/', phones.views.show_product),
 ]

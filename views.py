@@ -1,19 +1,17 @@
-import os
-from os import chdir
-
-from django.http import HttpResponse
 from django.shortcuts import render
-import datetime
+
+from phones.models import Phone
 
 
-def index(request):
-    return HttpResponse('hello from django')
+def show_catalog(request, sort):
+    sot = request.GET.get('sort')
+    template = 'catalog.html'
+    context = {'phone': [list(Phone.objects.all())], 'sort': sot}
+    return render(request, template, context)
 
 
-def current_time(request):
-    return HttpResponse(f'Time = {datetime.datetime.now()}')
-
-
-def work(request):
-    path = os.path.join(os.getcwd(),'views.py')
-    return HttpResponse(f"workdir = {path}")
+def show_product(request, slug):
+    template = 'product.html'
+    phone = Phone.objects.filter(title='slug')
+    context = {'phone': phone}
+    return render(request, template, context)

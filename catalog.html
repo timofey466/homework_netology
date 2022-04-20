@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Каталог{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <h1><a href="/catalog">Каталог</a></h1>
+        </div>
+
+        <div class="sort-block">
+
+            {% if sort == 'min_price' %}
+                <p>{{phone.title min(phone.price) phone.image phone.date phone.lte_exists}}</p>
+                <p>{{phone.title mean(phone.price) phone.image phone.date phone.lte_exists}}</p>
+                <p>{{phone.title max(phone.price) phone.image phone.date phone.lte_exists}}</p>
+
+            {% endif %}
+
+            {% if sort == 'max_price' %}
+                <p>{{phone.title max(phone.price) phone.image phone.date phone.lte_exists}}</p>
+                <p>{{phone.title mean(phone.price) phone.image phone.date phone.lte_exists}}</p>
+                <p>{{phone.title min(phone.price) phone.image phone.date phone.lte_exists}}</p>
+            {% endif %}
+
+            {% if sort == 'name' %}
+                <p> {{ sort(phone.name) phone.price phone.image phone.date phone.lte_exists}} </p>
+            {% endif %}
+
+        </div>
+
+        <div class="content">
+            {% for letters in phone %}
+                {{ letters }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
